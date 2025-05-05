@@ -1,0 +1,18 @@
+/func visit all connected land cells and marks them as visited
+void dfs(char** grid, int gridSize, int* gridColSize, int i, int j) {
+    if (i < 0 || i >= gridSize || j < 0 || j >= gridColSize[i] || grid[i][j] == '0') { //determines if out of bounds, stops recursion
+        return;
+    }
+    grid[i][j] = '0'; // Mark cell as visited
+    //then recurses all directions
+    dfs(grid, gridSize, gridColSize, i + 1, j); //down
+    dfs(grid, gridSize, gridColSize, i - 1, j); //up
+    dfs(grid, gridSize, gridColSize, i, j + 1); //right
+    dfs(grid, gridSize, gridColSize, i, j - 1); //left
+}
+//main func
+int numIslands(char** grid, int gridSize, int* gridColSize) {int count=0; //counts how many islands exist in grid
+    for(int i=0;i<gridSize;i++){for(int j=0;j<gridColSize[i];j++){ //iterate over each cell
+                    if(grid[i][j]=='1'){count+=1;}  dfs(grid, gridSize, gridColSize, i, j);           }    } //if cell is 1 new isalnd count increments call dfs func
+                    return count;
+}
